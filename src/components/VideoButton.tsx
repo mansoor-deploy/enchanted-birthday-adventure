@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import React, { useState, useRef } from 'react';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Play, X } from 'lucide-react';
 
 interface VideoButtonProps {
@@ -16,6 +16,7 @@ const VideoButton: React.FC<VideoButtonProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   
   const handleOpen = () => {
     setIsOpen(true);
@@ -25,6 +26,9 @@ const VideoButton: React.FC<VideoButtonProps> = ({
   
   const handleClose = () => {
     setIsOpen(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
     onVideoClose();
   };
   
@@ -45,6 +49,7 @@ const VideoButton: React.FC<VideoButtonProps> = ({
         if (!open) handleClose();
       }}>
         <DialogContent className="sm:max-w-[700px] p-0 bg-transparent border-none">
+          <DialogTitle className="sr-only">Birthday Video</DialogTitle>
           <div className="relative">
             <button 
               onClick={handleClose}
@@ -55,6 +60,7 @@ const VideoButton: React.FC<VideoButtonProps> = ({
             
             <div className="rounded-lg overflow-hidden shadow-xl">
               <video 
+                ref={videoRef}
                 src={videoUrl} 
                 controls 
                 autoPlay 

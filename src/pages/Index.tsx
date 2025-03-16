@@ -1,15 +1,19 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import InvitationHero from '@/components/InvitationHero';
 import CountdownTimer from '@/components/CountdownTimer';
 import EventDetails from '@/components/EventDetails';
 import GuestBook from '@/components/GuestBook';
 import MusicPlayer from '@/components/MusicPlayer';
 import VideoButton from '@/components/VideoButton';
+import GoogleMap from '@/components/GoogleMap';
+import WelcomePopup from '@/components/WelcomePopup';
+import PageLoader from '@/components/PageLoader';
 import { setupScrollAnimations, setupParallaxEffect, createFairyDust } from '@/utils/animationUtils';
 import { useToast } from '@/components/ui/use-toast';
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const audioControlsRef = useRef<{ pause: () => void; play: () => void }>({
     pause: () => {},
@@ -21,8 +25,15 @@ const Index = () => {
   const eventDate = new Date("2024-06-15T18:00:00");
   const birthdayName = "Sarah";
   const birthdayAge = 25;
+  const venueName = "Enchanted Garden";
+  const venueAddress = "123 Fairytale Lane, Wonderland";
 
   useEffect(() => {
+    // Simulate loading time
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
     // Set up scroll animations
     const cleanupScrollAnimations = setupScrollAnimations();
     
@@ -36,6 +47,7 @@ const Index = () => {
     }
     
     return () => {
+      clearTimeout(loadingTimer);
       cleanupScrollAnimations();
       cleanupParallaxEffect();
       if (cleanupFairyDust) cleanupFairyDust();
@@ -50,10 +62,20 @@ const Index = () => {
     audioControlsRef.current.play();
   };
 
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
   return (
     <div className="min-h-screen overflow-hidden" ref={containerRef}>
+      {/* Welcome Popup */}
+      <WelcomePopup name={birthdayName} age={birthdayAge} />
+      
       {/* Music Player */}
-      <MusicPlayer audioPath="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+      <MusicPlayer 
+        audioControlsRef={audioControlsRef}
+        audioPath="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+      />
       
       {/* Video Button */}
       <VideoButton 
@@ -88,11 +110,24 @@ const Index = () => {
           <div className="hidden-initially">
             <EventDetails 
               eventDate={eventDate}
-              venueName="Enchanted Garden"
-              venueAddress="123 Fairytale Lane, Wonderland"
+              venueName={venueName}
+              venueAddress={venueAddress}
               additionalInfo="Join us for a magical celebration filled with joy and wonder!"
               dresscode="Fairytale Casual"
               giftRegistry="https://example.com/gift-registry"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Location Map Section */}
+      <section className="py-16 bg-enchanted-green/10">
+        <div className="container px-4 sm:px-6">
+          <div className="hidden-initially max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl mb-6 font-semibold text-center">Find Us Here</h2>
+            <GoogleMap 
+              venueName={venueName} 
+              address={venueAddress} 
             />
           </div>
         </div>
