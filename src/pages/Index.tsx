@@ -73,8 +73,8 @@ const Index = () => {
       
       {/* Music Player */}
       <MusicPlayer 
-        audioControlsRef={audioControlsRef}
         audioPath="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+        audioControlsRef={audioControlsRef}
       />
       
       {/* Video Button */}
@@ -90,14 +90,18 @@ const Index = () => {
       {/* Countdown Section */}
       <section className="py-16 bg-enchanted-lavender/10">
         <div className="container px-4 sm:px-6">
-          <div className="hidden-initially">
+          <div className="max-w-3xl mx-auto">
             <CountdownTimer 
               targetDate={eventDate} 
               onExpire={() => {
-                toast({
-                  title: "It's time!",
-                  description: "The birthday celebration has begun!",
-                });
+                // Only show toast when countdown actually expires
+                const now = new Date();
+                if (now >= eventDate) {
+                  toast({
+                    title: "It's time!",
+                    description: "The birthday celebration has begun!",
+                  });
+                }
               }} 
             />
           </div>
@@ -107,7 +111,7 @@ const Index = () => {
       {/* Event Details Section */}
       <section id="event-details" className="py-16">
         <div className="container px-4 sm:px-6">
-          <div className="hidden-initially">
+          <div className="max-w-3xl mx-auto">
             <EventDetails 
               eventDate={eventDate}
               venueName={venueName}
@@ -123,7 +127,7 @@ const Index = () => {
       {/* Location Map Section */}
       <section className="py-16 bg-enchanted-green/10">
         <div className="container px-4 sm:px-6">
-          <div className="hidden-initially max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-3xl mb-6 font-semibold text-center">Find Us Here</h2>
             <GoogleMap 
               venueName={venueName} 
@@ -136,7 +140,7 @@ const Index = () => {
       {/* Guest Book Section */}
       <section className="py-16 bg-enchanted-lavender/10">
         <div className="container px-4 sm:px-6">
-          <div className="hidden-initially">
+          <div className="max-w-3xl mx-auto">
             <GuestBook />
           </div>
         </div>

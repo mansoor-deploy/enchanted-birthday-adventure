@@ -12,7 +12,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ address, venueName }) => {
   const mapSrc = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBgCSVxo-SB9YhD4xZQgw7Z3R1MHi4F8YA&q=${encodedAddress}&zoom=15`;
 
   return (
-    <div className="w-full h-[300px] rounded-lg overflow-hidden shadow-md fancy-border">
+    <div className="w-full h-[300px] rounded-lg overflow-hidden shadow-md border-2 border-enchanted-lavender/20">
       <iframe
         title="Event Location"
         width="100%"
@@ -20,6 +20,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ address, venueName }) => {
         frameBorder="0"
         src={mapSrc}
         allowFullScreen
+        className="w-full h-full"
       ></iframe>
     </div>
   );
