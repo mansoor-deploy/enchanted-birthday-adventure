@@ -22,7 +22,7 @@ const Index = () => {
   const { toast } = useToast();
 
   // Birthday event details - customize these
-  const eventDate = new Date("2024-06-15T18:00:00");
+  const eventDate = new Date("2025-03-30T18:00:00");
   const birthdayName = "Sarah";
   const birthdayAge = 25;
   const venueName = "Enchanted Garden";
