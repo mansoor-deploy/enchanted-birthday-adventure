@@ -1,0 +1,18 @@
+
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="fairy-dust" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#E5DEFF" opacity="0.4" />
+      <circle cx="25" cy="30" r="0.8" fill="#FFDEE2" opacity="0.3" />
+      <circle cx="40" cy="15" r="0.6" fill="#F2FCE2" opacity="0.5" />
+      <circle cx="60" cy="35" r="1.2" fill="#FEF7CD" opacity="0.4" />
+      <circle cx="80" cy="20" r="0.9" fill="#E5DEFF" opacity="0.3" />
+      <circle cx="90" cy="50" r="0.7" fill="#FFDEE2" opacity="0.5" />
+      <circle cx="70" cy="70" r="1.1" fill="#F2FCE2" opacity="0.4" />
+      <circle cx="50" cy="85" r="0.8" fill="#FEF7CD" opacity="0.3" />
+      <circle cx="30" cy="60" r="1" fill="#E5DEFF" opacity="0.5" />
+      <circle cx="15" cy="80" r="0.6" fill="#FFDEE2" opacity="0.4" />
+    </pattern>
+  </defs>
+  <rect width="100" height="100" fill="url(#fairy-dust)" />
+</svg>
